@@ -162,7 +162,7 @@ const kanjiLib = [
     {"kanji": "西口", "meaning": "west exit", "reading": "さいぐち", "chapter": "3", "subchapter": "2"},
     {"kanji": "南", "meaning": "south", "reading": "みなみ", "chapter": "3", "subchapter": "2"},
     {"kanji": "南口", "meaning": "south exit", "reading": "みなみぐち", "chapter": "3", "subchapter": "2"},
-    {"kanji": "南東アジア", "meaning": "southeast asia", "reading": "なんとうアジア", "chapter": "3", "subchapter": "2"},
+    {"kanji": "南東", "meaning": "southeast", "reading": "なんとう", "chapter": "3", "subchapter": "2"},
     {"kanji": "北", "meaning": "north", "reading": "きた", "chapter": "3", "subchapter": "2"},
     {"kanji": "北口", "meaning": "north exit", "reading": "きたぐち", "chapter": "3", "subchapter": "2"},
 ];
