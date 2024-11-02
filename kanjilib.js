@@ -9,7 +9,7 @@ const kanjiLib = [
     {"kanji": "八", "meaning": "eight", "reading": "はち", "chapter": "1", "subchapter": "1"},
     {"kanji": "九", "meaning": "nine", "reading": "きゅう", "chapter": "1", "subchapter": "1"},
     {"kanji": "十", "meaning": "ten", "reading": "じゅう", "chapter": "1", "subchapter": "1"},
-    {"kanji": "二十", "meaning": "twenty", "reading": "はたち", "chapter": "1", "subchapter": "1"},
+    {"kanji": "二十", "meaning": "twenty", "reading": "にじゅう", "chapter": "1", "subchapter": "1"},
     {"kanji": "三十", "meaning": "thirty", "reading": "さんじゅう", "chapter": "1", "subchapter": "1"},
     {"kanji": "四十", "meaning": "forty", "reading": "よんじゅう", "chapter": "1", "subchapter": "1"},
     {"kanji": "五十", "meaning": "fifty", "reading": "ごじゅう", "chapter": "1", "subchapter": "1"},
