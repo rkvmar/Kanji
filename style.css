@@ -156,23 +156,42 @@ body {
 #chapter-select {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     margin-bottom: 20px;
 }
 
-#chapter-select label {
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
+.chapter-group {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
-    padding: 8px 16px;
-    width: 200px;
+    padding: 12px;
+}
+
+.chapter-label {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.subchapter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 24px;
+}
+
+.subchapter-group label {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
 }
 
 #chapter-select input[type="checkbox"] {

@@ -49,11 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'ltsu': 'っ',
         'sha': 'しゃ', 'shu': 'しゅ', 'sho': 'しょ',
         'ja': 'じゃ', 'ju': 'じゅ', 'jo': 'じょ',
+        'jya': 'じゃ', 'jyu': 'じゅ', 'jyo': 'じょ',
         'cha': 'ちゃ', 'chu': 'ちゅ', 'cho': 'ちょ',
         'nya': 'にゃ', 'nyu': 'にゅ', 'nyo': 'にょ',
         'hya': 'ひゃ', 'hyu': 'ひゅ', 'hyo': 'ひょ',
-        'mya': 'みゃ', 'myu': 'み���', 'myo': 'みょ',
-        'rya': 'りゃ', 'ryu': 'りゅ', 'ryo': 'ょ',
+        'mya': 'みゃ', 'myu': 'みゅ', 'myo': 'みょ',
+        'rya': 'りゃ', 'ryu': 'りゅ', 'ryo': 'りょ',
         'gya': 'ぎゃ', 'gyu': 'ぎゅ', 'gyo': 'ぎょ',
         'bya': 'びゃ', 'byu': 'びゅ', 'byo': 'びょ',
         'pya': 'ぴゃ', 'pyu': 'ぴゅ', 'pyo': 'ぴょ',
@@ -211,24 +212,31 @@ document.addEventListener('DOMContentLoaded', () => {
         chooseKanji();
     }
 
-    // Add this function to filter kanji by selected chapters
+    // Update the getSelectedChapters function
     function getSelectedChapters() {
-        const checkboxes = document.querySelectorAll('#chapter-select input[type="checkbox"]:checked');
-        return Array.from(checkboxes).map(cb => cb.value);
+        const subchapterCheckboxes = document.querySelectorAll('#chapter-select .subchapter-group input[type="checkbox"]:checked');
+        return Array.from(subchapterCheckboxes).map(cb => {
+            const [chapter, subchapter] = cb.value.split('-');
+            return { chapter, subchapter };
+        });
     }
 
     // Event Listeners
     startButton.addEventListener('click', () => {
         console.log('Start button clicked');
         
-        const selectedChapters = getSelectedChapters();
-        if (selectedChapters.length === 0) {
-            alert('Please select at least one chapter');
+        const selectedSubchapters = getSelectedChapters();
+        if (selectedSubchapters.length === 0) {
+            alert('Please select at least one subchapter');
             return;
         }
         
-        // Filter kanji based on selected chapters
-        const filteredKanji = kanjiLib.filter(k => selectedChapters.includes(k.chapter));
+        // Filter kanji based on selected subchapters
+        const filteredKanji = kanjiLib.filter(k => 
+            selectedSubchapters.some(s => 
+                s.chapter === k.chapter && s.subchapter === k.subchapter
+            )
+        );
         
         remainingReadingKanji = [...filteredKanji];
         remainingMeaningKanji = [...filteredKanji];
@@ -255,4 +263,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial displays
     scoreElement.innerHTML = `score: ${score}`;
+
+    // Add chapter checkbox functionality
+    document.querySelectorAll('.chapter-label input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            const chapter = e.target.value;
+            const subchapters = e.target.closest('.chapter-group')
+                .querySelectorAll('.subchapter-group input[type="checkbox"]');
+            
+            subchapters.forEach(sub => {
+                sub.checked = e.target.checked;
+            });
+        });
+    });
 });
