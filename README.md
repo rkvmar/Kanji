@@ -1,1 +1,3 @@
 # Kanji
+
+Kanji learning app.
