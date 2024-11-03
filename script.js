@@ -107,10 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
         kanjielment.innerHTML = randomKanji.kanji;
         if (randomMode === 'reading') {
             input.placeholder = 'kanji reading';
-            topbar.style.backgroundColor = '#5ef2b2';
+            topbar.className = 'reading';
         } else if (randomMode === 'meaning') {
             input.placeholder = 'kanji meaning';
-            topbar.style.backgroundColor = '#5ea5f2';
+            topbar.className = 'meaning';
         }
         result.innerHTML = '';
         input.value = '';

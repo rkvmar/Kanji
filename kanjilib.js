@@ -106,7 +106,7 @@ const kanjiLib = [
     {"kanji": "六時", "meaning": "six o'clock", "reading": "ろくじ", "chapter": "2", "subchapter": "2"},
     {"kanji": "七時", "meaning": "seven o'clock", "reading": "ななじ", "chapter": "2", "subchapter": "2"},
     {"kanji": "八時", "meaning": "eight o'clock", "reading": "はちじ", "chapter": "2", "subchapter": "2"},
-    {"kanji": "九時", "meaning": "nine o'clock", "reading": "きゅうじ", "chapter": "2", "subchapter": "2"},
+    {"kanji": "九時", "meaning": "nine o'clock", "reading": "くじ", "chapter": "2", "subchapter": "2"},
     {"kanji": "十時", "meaning": "ten o'clock", "reading": "じゅうじ", "chapter": "2", "subchapter": "2"},
     {"kanji": "十一時", "meaning": "eleven o'clock", "reading": "じゅういちじ", "chapter": "2", "subchapter": "2"},
     {"kanji": "十二時", "meaning": "twelve o'clock", "reading": "じゅうにじ", "chapter": "2", "subchapter": "2"},
