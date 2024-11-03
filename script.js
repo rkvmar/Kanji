@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM Content Loaded');
+    
     // DOM Elements
     const kanjielment = document.getElementById('kanji');
     const input = document.getElementById('kanjiinput');
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'ltsu': 'っ',
         'sha': 'しゃ', 'shu': 'しゅ', 'sho': 'しょ',
         'ja': 'じゃ', 'ju': 'じゅ', 'jo': 'じょ',
-        'jya': 'じゃ', 'jyu': 'じゅ', 'jyo': 'じょ',
+        'jya': 'ゃ', 'jyu': 'じゅ', 'jyo': 'じょ',
         'cha': 'ちゃ', 'chu': 'ちゅ', 'cho': 'ちょ',
         'nya': 'にゃ', 'nyu': 'にゅ', 'nyo': 'にょ',
         'hya': 'ひゃ', 'hyu': 'ひゅ', 'hyo': 'ひょ',
@@ -59,51 +61,114 @@ document.addEventListener('DOMContentLoaded', () => {
         'bya': 'びゃ', 'byu': 'びゅ', 'byo': 'びょ',
         'pya': 'ぴゃ', 'pyu': 'ぴゅ', 'pyo': 'ぴょ',
         'kya': 'きゃ', 'kyu': 'きゅ', 'kyo': 'きょ',
+        '~': '〜'
     };
 
+    // First, declare the variables
+    let difficultKanji;
+    let reviewMode = false;
+
+    // Then define all functions
+    function loadDifficultKanji() {
+        const saved = localStorage.getItem('difficultKanji');
+        const loadedKanji = saved ? JSON.parse(saved) : [];
+        console.log('Loaded difficult kanji:', loadedKanji);
+        return loadedKanji;
+    }
+
+    function saveDifficultKanji() {
+        const kanjiArray = Array.from(difficultKanji);
+        console.log('Saving difficult kanji:', kanjiArray);
+        localStorage.setItem('difficultKanji', JSON.stringify(kanjiArray));
+    }
+
+    function updateStartScreenReviewButton() {
+        const startReviewButton = document.getElementById('start-review-button');
+        const difficultCount = difficultKanji.size;
+        console.log('Updating review button. Difficult count:', difficultCount);
+        console.log('Current difficult kanji:', Array.from(difficultKanji));
+        
+        if (difficultCount > 0) {
+            startReviewButton.classList.remove('hidden');
+            startReviewButton.textContent = `Review Difficult Kanji (${difficultCount})`;
+            console.log('Review button shown');
+        } else {
+            startReviewButton.classList.add('hidden');
+            console.log('Review button hidden');
+        }
+    }
+
+    // Initialize the Set after functions are defined
+    difficultKanji = new Set(loadDifficultKanji());
+
     function chooseKanji() {
+        console.log('Choosing kanji');
+        console.log('Review mode:', reviewMode);
+        
         mistakeMade = false;
         
-        // Calculate total remaining (each kanji needs to be done twice - once for reading, once for meaning)
-        const totalRemaining = remainingReadingKanji.length + remainingMeaningKanji.length;
-        
-        // Debug logs
-        console.log('Current total remaining:', totalRemaining);
-        console.log('Reading list length:', remainingReadingKanji.length);
-        console.log('Meaning list length:', remainingMeaningKanji.length);
-        
-        // Select initial mode
-        randomMode = mode[Math.floor(Math.random() * mode.length)];
-        
-        // If reading mode is selected but reading list is empty, force meaning mode
-        if (randomMode === 'reading' && remainingReadingKanji.length === 0) {
-            randomMode = 'meaning';
+        if (reviewMode) {
+            const difficultKanjiArray = Array.from(difficultKanji).map(k => JSON.parse(k));
+            console.log('Difficult kanji array:', difficultKanjiArray);
+            
+            if (difficultKanjiArray.length === 0) {
+                console.log('Review complete - showing win screen');
+                gameScreen.classList.add('hidden');
+                winScreen.classList.remove('hidden');
+                finalScoreElement.textContent = score;
+                document.getElementById('difficult-count').textContent = '0';
+                document.getElementById('review-button').classList.add('hidden');
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * difficultKanjiArray.length);
+            randomKanji = difficultKanjiArray[randomIndex];
+            randomMode = mode[Math.floor(Math.random() * mode.length)];
+            console.log('Selected review kanji:', randomKanji);
+            console.log('Selected mode:', randomMode);
+        } else {
+            // Calculate total remaining (each kanji needs to be done twice - once for reading, once for meaning)
+            const totalRemaining = remainingReadingKanji.length + remainingMeaningKanji.length;
+            
+            // Debug logs
+            console.log('Current total remaining:', totalRemaining);
+            console.log('Reading list length:', remainingReadingKanji.length);
+            console.log('Meaning list length:', remainingMeaningKanji.length);
+            
+            // Select initial mode
+            randomMode = mode[Math.floor(Math.random() * mode.length)];
+            
+            // If reading mode is selected but reading list is empty, force meaning mode
+            if (randomMode === 'reading' && remainingReadingKanji.length === 0) {
+                randomMode = 'meaning';
+            }
+            // If meaning mode is selected but meaning list is empty, force reading mode
+            else if (randomMode === 'meaning' && remainingMeaningKanji.length === 0) {
+                randomMode = 'reading';
+            }
+            
+            // Only show win screen if both lists are completely empty
+            if (remainingReadingKanji.length === 0 && remainingMeaningKanji.length === 0) {
+                checkWinCondition();
+                return;
+            }
+            
+            if (randomMode === 'reading') {
+                const randomIndex = Math.floor(Math.random() * remainingReadingKanji.length);
+                randomKanji = remainingReadingKanji[randomIndex];
+                remainingReadingKanji.splice(randomIndex, 1);
+                console.log('Selected reading kanji:', randomKanji);
+                console.log('Remaining reading list:', remainingReadingKanji);
+            } else if (randomMode === 'meaning') {
+                const randomIndex = Math.floor(Math.random() * remainingMeaningKanji.length);
+                randomKanji = remainingMeaningKanji[randomIndex];
+                remainingMeaningKanji.splice(randomIndex, 1);
+                console.log('Selected meaning kanji:', randomKanji);
+                console.log('Remaining meaning list:', remainingMeaningKanji);
+            }
         }
-        // If meaning mode is selected but meaning list is empty, force reading mode
-        else if (randomMode === 'meaning' && remainingMeaningKanji.length === 0) {
-            randomMode = 'reading';
-        }
         
-        // Only show win screen if both lists are completely empty
-        if (remainingReadingKanji.length === 0 && remainingMeaningKanji.length === 0) {
-            checkWinCondition();
-            return;
-        }
-        
-        if (randomMode === 'reading') {
-            const randomIndex = Math.floor(Math.random() * remainingReadingKanji.length);
-            randomKanji = remainingReadingKanji[randomIndex];
-            remainingReadingKanji.splice(randomIndex, 1);
-            console.log('Selected reading kanji:', randomKanji);
-            console.log('Remaining reading list:', remainingReadingKanji);
-        } else if (randomMode === 'meaning') {
-            const randomIndex = Math.floor(Math.random() * remainingMeaningKanji.length);
-            randomKanji = remainingMeaningKanji[randomIndex];
-            remainingMeaningKanji.splice(randomIndex, 1);
-            console.log('Selected meaning kanji:', randomKanji);
-            console.log('Remaining meaning list:', remainingMeaningKanji);
-        }
-        
+        // Update display
         kanjielment.innerHTML = randomKanji.kanji;
         if (randomMode === 'reading') {
             input.placeholder = 'kanji reading';
@@ -165,31 +230,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkAnswer() {
+        console.log('Checking answer:', input.value);
+        console.log('Current mode:', randomMode);
+        console.log('Current kanji:', randomKanji);
+        console.log('Review mode:', reviewMode);
+
         if (randomMode === 'reading') {
             if (input.value.toLowerCase() === randomKanji.reading.toLowerCase()) {
+                console.log('Correct reading answer');
                 if (!mistakeMade) {
                     score++;
                     scoreElement.innerHTML = `score: ${score}`;
                 }
+                if (reviewMode) {
+                    console.log('Removing from difficult kanji:', randomKanji);
+                    difficultKanji.delete(JSON.stringify(randomKanji));
+                    saveDifficultKanji();
+                    updateStartScreenReviewButton();
+                    
+                    // Update remaining counter after removing kanji
+                    const remainingElement = document.getElementById('remaining');
+                    remainingElement.textContent = `Remaining: ${difficultKanji.size}`;
+                }
                 chooseKanji();
                 checkWinCondition();
             } else {
+                console.log('Incorrect reading answer');
                 mistakeMade = true;
                 input.value = '';
                 result.innerHTML = randomKanji.reading;
+                console.log('Adding to difficult kanji:', randomKanji);
+                difficultKanji.add(JSON.stringify(randomKanji));
+                saveDifficultKanji();
+                updateStartScreenReviewButton();
             }
         } else if (randomMode === 'meaning') {
             if (input.value.toLowerCase() === randomKanji.meaning.toLowerCase()) {
+                console.log('Correct meaning answer');
                 if (!mistakeMade) {
                     score++;
                     scoreElement.innerHTML = `score: ${score}`;
                 }
+                if (reviewMode) {
+                    console.log('Removing from difficult kanji:', randomKanji);
+                    difficultKanji.delete(JSON.stringify(randomKanji));
+                    saveDifficultKanji();
+                    updateStartScreenReviewButton();
+                    
+                    // Update remaining counter after removing kanji
+                    const remainingElement = document.getElementById('remaining');
+                    remainingElement.textContent = `Remaining: ${difficultKanji.size}`;
+                }
                 chooseKanji();
                 checkWinCondition();
             } else {
+                console.log('Incorrect meaning answer');
                 mistakeMade = true;
                 input.value = '';
                 result.innerHTML = randomKanji.meaning;
+                console.log('Adding to difficult kanji:', randomKanji);
+                difficultKanji.add(JSON.stringify(randomKanji));
+                saveDifficultKanji();
+                updateStartScreenReviewButton();
             }
         }
     }
@@ -199,17 +301,30 @@ document.addEventListener('DOMContentLoaded', () => {
             gameScreen.classList.add('hidden');
             winScreen.classList.remove('hidden');
             finalScoreElement.textContent = score;
+            
+            // Update difficult kanji count
+            const difficultCount = difficultKanji.size;
+            document.getElementById('difficult-count').textContent = difficultCount;
+            
+            // Show/hide review button based on difficult kanji
+            const reviewButton = document.getElementById('review-button');
+            if (difficultCount > 0) {
+                reviewButton.classList.remove('hidden');
+            } else {
+                reviewButton.classList.add('hidden');
+            }
         }
     }
 
     function resetGame() {
+        console.log('Resetting game');
+        reviewMode = false;
         score = 0;
         scoreElement.innerHTML = `score: ${score}`;
-        remainingReadingKanji = [...kanjiLib];
-        remainingMeaningKanji = [...kanjiLib];
+        startScreen.classList.remove('hidden');
+        gameScreen.classList.add('hidden');
         winScreen.classList.add('hidden');
-        gameScreen.classList.remove('hidden');
-        chooseKanji();
+        updateStartScreenReviewButton();
     }
 
     // Update the getSelectedChapters function
@@ -253,13 +368,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    input.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') {
-            checkAnswer();
+    input.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+            if (reviewMode) {
+                checkAnswer();
+                input.value = '';
+            } else {
+                if (randomMode === 'reading') {
+                    if (remainingReadingKanji.length > 0) {
+                        checkAnswer();
+                        input.value = '';
+                    }
+                } else if (randomMode === 'meaning') {
+                    if (remainingMeaningKanji.length > 0) {
+                        checkAnswer();
+                        input.value = '';
+                    }
+                }
+            }
         }
     });
 
-    restartButton.addEventListener('click', resetGame);
+    restartButton.addEventListener('click', () => {
+        resetGame();
+    });
 
     // Initial displays
     scoreElement.innerHTML = `score: ${score}`;
@@ -276,4 +408,47 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // Add new function to start review mode
+    function startReviewMode() {
+        reviewMode = true;
+        score = 0;
+        scoreElement.innerHTML = `score: ${score}`;
+        winScreen.classList.add('hidden');
+        gameScreen.classList.remove('hidden');
+        chooseKanji();
+    }
+
+    // Update review button on start screen
+    updateStartScreenReviewButton();
+
+    // Add event listener for start screen review button
+    const startReviewButton = document.getElementById('start-review-button');
+    console.log('Start review button element:', startReviewButton);
+    
+    startReviewButton.addEventListener('click', () => {
+        console.log('Review button clicked');
+        console.log('Current difficult kanji:', Array.from(difficultKanji));
+        
+        reviewMode = true;
+        score = 0;
+        scoreElement.innerHTML = `score: ${score}`;
+        startScreen.classList.add('hidden');
+        gameScreen.classList.remove('hidden');
+        
+        // Convert difficult kanji Set to array for review
+        const difficultKanjiArray = Array.from(difficultKanji).map(k => JSON.parse(k));
+        console.log('Difficult kanji array for review:', difficultKanjiArray);
+        
+        remainingReadingKanji = [...difficultKanjiArray];
+        remainingMeaningKanji = [...difficultKanjiArray];
+        console.log('Initialized remaining reading kanji:', remainingReadingKanji);
+        console.log('Initialized remaining meaning kanji:', remainingMeaningKanji);
+        
+        chooseKanji();
+    });
+
+    // Initial update of review button
+    console.log('Initial update of review button');
+    updateStartScreenReviewButton();
 });
