@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputField = document.getElementById('kanjiinput');
     let compositionText = '';
 
+    let waitingForNext = false;
+    let waitingForCorrect = false;
+    let currentCorrectAnswer = '';
+
     // Function to generate the chapter structure
     function generateChapterStructure() {
         const chapterSelect = document.getElementById('chapter-select');
@@ -226,6 +230,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function checkAnswer() {
         let userAnswer = input.value.trim();
+        
+        if (waitingForCorrect) {
+            // If waiting for correct answer, only check against the correct answer
+            if (randomMode === 'reading') {
+                userAnswer = wanakana.toHiragana(userAnswer);
+            } else {
+                userAnswer = userAnswer.toLowerCase();
+            }
+
+            if (userAnswer === currentCorrectAnswer) {
+                waitingForCorrect = false;
+                currentCorrectAnswer = '';
+                nextKanji();
+                result.innerHTML = '';
+                input.value = '';
+            } else {
+                result.innerHTML = `Incorrect. The correct answer is: ${currentCorrectAnswer}. Please type it to continue.`;
+                input.value = '';
+            }
+            return;
+        }
+
         const correctAnswer = randomMode === 'reading' ? 
             randomKanji.reading : 
             randomKanji.meaning.toLowerCase();
@@ -243,14 +269,15 @@ document.addEventListener('DOMContentLoaded', () => {
             score++;
             scoreElement.textContent = score;
             nextKanji();
+            input.value = '';
         } else {
-            result.innerHTML = `Incorrect. The correct answer is: ${correctAnswer}`;
+            result.innerHTML = `Incorrect. The correct answer is: ${correctAnswer}. Please type it to continue.`;
             result.className = 'incorrect';
             difficultKanji.push(randomKanji);
-            endGame();
+            waitingForCorrect = true;
+            currentCorrectAnswer = correctAnswer;
+            input.value = '';
         }
-        
-        input.value = '';
     }
 
     function updateProgress() {
