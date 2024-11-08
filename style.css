@@ -98,7 +98,7 @@ body {
     border-radius: 16px;
     padding: 20px;
     width: 90%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     max-height: 90vh;
@@ -168,25 +168,22 @@ body {
 }
 
 #chapter-select-wrapper {
-    position: relative;
-    max-height: 50vh;
+    height: 400px;
     overflow-y: auto;
-    padding: 10px;
-    margin: 10px 0;
-    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 12px;
-    box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.17);
-    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 80%;
+    margin: 0 auto;
 }
 
 #chapter-select {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px 0;
     padding-right: 4px;
 }
 
@@ -196,33 +193,81 @@ body {
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 8px;
+    padding: 0;
 }
 
 .chapter-label {
-    font-size: 18px;
-    font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 8px;
+    padding: 12px;
+    cursor: default;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
     cursor: pointer;
-    margin-bottom: 8px;
+}
+
+.chapter-text {
+    flex-grow: 1;
+}
+
+.arrow {
+    margin-left: auto;
+    transform: rotate(-90deg);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.arrow:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.chapter-group.open .arrow {
+    transform: rotate(0);
 }
 
 .subchapter-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     margin-left: 24px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-out;
+    padding: 0;
+    margin-bottom: 0;
+    visibility: hidden;
+}
+
+.chapter-group.open .subchapter-group {
+    max-height: 1000px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease-in;
+    padding-bottom: 12px;
+    visibility: visible;
 }
 
 .subchapter-group label {
-    font-size: 0.9em;
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 5px 0;
+    padding: 4px 0;
+}
+
+.subchapter-group input[type="checkbox"] {
     cursor: pointer;
 }
 
@@ -391,4 +436,66 @@ body {
     filter: 
         drop-shadow(0 0 4px rgba(94, 242, 178, 0.5))
         drop-shadow(0 -2px 6px rgba(94, 242, 178, 0.7));
+}
+
+.arrow {
+    cursor: pointer;
+    padding: 8px;
+    user-select: none;
+    transition: transform 0.3s ease;
+}
+
+.chapter-group.open .arrow {
+    transform: rotate(0deg);
+}
+
+.arrow:not(.chapter-group.open .arrow) {
+    transform: rotate(-90deg);
+}
+
+.subchapter {
+    margin-bottom: 8px;
+}
+
+.subchapter-label {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: default;
+}
+
+.kanji-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 24px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-out;
+    visibility: hidden;
+}
+
+.subchapter.open .kanji-group {
+    max-height: 2000px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease-in;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    visibility: visible;
+}
+
+.kanji-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+/* Add click handling for subchapter labels */
+.subchapter-label {
+    cursor: pointer;
 }

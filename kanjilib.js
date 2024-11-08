@@ -62,7 +62,7 @@ const kanjiLib = [
     {"kanji": "目", "meaning": "eye", "reading": "め", "chapter": "1", "subchapter": "2"},
     {"kanji": "日", "meaning": "day", "reading": "にち", "chapter": "2", "subchapter": "1"},
     {"kanji": "月", "meaning": "moon", "reading": "つき", "chapter": "2", "subchapter": "1"},
-    {"kanji": "��", "meaning": "fire", "reading": "ひ", "chapter": "2", "subchapter": "1"},
+    {"kanji": "火", "meaning": "fire", "reading": "ひ", "chapter": "2", "subchapter": "1"},
     {"kanji": "水", "meaning": "water", "reading": "みず", "chapter": "2", "subchapter": "1"},
     {"kanji": "木", "meaning": "tree", "reading": "き", "chapter": "2", "subchapter": "1"},
     {"kanji": "お金", "meaning": "money", "reading": "おかね", "chapter": "2", "subchapter": "1"},

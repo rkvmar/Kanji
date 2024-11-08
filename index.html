@@ -5,33 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanji Training</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/wanakana@4.0.2/umd/wanakana.min.js"></script>
 </head>
 <body>
     <div id="start-screen">
         <h1>Kanji Training</h1>
         <div id="chapter-select-wrapper">
             <div id="chapter-select">
-                <div class="chapter-group">
-                    <label class="chapter-label"><input type="checkbox" value="1" checked> Chapter 1</label>
-                    <div class="subchapter-group">
-                        <label><input type="checkbox" value="1-1" checked>一　二　三　四　五　六　七　八　九　十</label>
-                        <label><input type="checkbox" value="1-2" checked>百　千　万　円　口　目</label>
-                    </div>
-                </div>
-                <div class="chapter-group">
-                    <label class="chapter-label"><input type="checkbox" value="2" checked> Chapter 2</label>
-                    <div class="subchapter-group">
-                        <label><input type="checkbox" value="2-1" checked>日　月　火　水　木　金　土　曜</label>
-                        <label><input type="checkbox" value="2-2" checked>本　人　今　寺　時　半　分</label>
-                    </div>
-                </div>
-                <div class="chapter-group">
-                    <label class="chapter-label"><input type="checkbox" value="3" checked> Chapter 3</label>
-                    <div class="subchapter-group">
-                        <label><input type="checkbox" value="3-1" checked>上　下　中　外　右　左　前　後</label>
-                        <label><input type="checkbox" value="3-2" checked>午　門　間　東　西　南　北</label>
-                    </div>
-                </div>
+                <!-- Content will be generated dynamically -->
             </div>
         </div>
         <button id="start-review-button" class="hidden">Review Difficult Kanji</button>
