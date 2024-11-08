@@ -70,11 +70,14 @@ body {
     width: 100%;
 }
 #score {
-    font-size: 20px;
     position: absolute;
-    left: 30px;
-    color: #333;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
 }
 
 .hidden {
@@ -303,15 +306,6 @@ body {
     background: rgba(242, 94, 94, 0.5);
 }
 
-/* Add styling for the remaining counter */
-#remaining {
-    font-size: 20px;
-    position: absolute;
-    right: 30px;
-    color: #333;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
 /* Scrollbar styling */
 #chapter-select-wrapper::-webkit-scrollbar {
     width: 8px;
@@ -356,4 +350,45 @@ body {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;  /* Include padding in width calculation */
+}
+
+#progress-container {
+    width: 160px;
+    height: 160px;
+    margin: 20px auto;
+    position: relative;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 4px 24px -1px rgba(0, 0, 0, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+    filter: drop-shadow(0 0 10px rgba(94, 242, 178, 0.3));
+}
+
+.progress-ring__circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.15);
+    stroke-width: 12px;
+    filter: blur(0.5px);
+}
+
+.progress-ring__circle {
+    fill: none;
+    stroke: rgba(94, 242, 178, 0.7);
+    stroke-width: 12px;
+    stroke-linecap: round;
+    stroke-dasharray: 452.389;
+    stroke-dashoffset: 452.389;
+    transition: stroke-dashoffset 0.3s ease;
+    filter: 
+        drop-shadow(0 0 4px rgba(94, 242, 178, 0.5))
+        drop-shadow(0 -2px 6px rgba(94, 242, 178, 0.7));
 }

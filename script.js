@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const winScreen = document.getElementById('win-screen');
     const finalScoreElement = document.getElementById('final-score');
     const restartButton = document.getElementById('restart-button');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
 
     // Add these debug lines
     console.log('Start button element:', startButton);
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let remainingMeaningKanji = [];
     let score = 0;
     let mistakeMade = false;
+    let filteredKanji = [];
 
     // Hiragana conversion map
     const hiraganaMap = {
@@ -47,11 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'za': 'ざ', 'ji': 'じ', 'zu': 'ず', 'ze': 'ぜ', 'zo': 'ぞ',
         'da': 'だ', 'di': 'ぢ', 'du': 'づ', 'de': 'で', 'do': 'ど',
         'ba': 'ば', 'bi': 'び', 'bu': 'ぶ', 'be': 'べ', 'bo': 'ぼ',
-        'pa': 'ぱ', 'pi': 'ぴ', 'pu': 'ぷ', 'pe': 'ぺ', 'po': 'ぽ',
+        'pa': 'ぱ', 'pi': 'ぴ', 'pu': 'ぷ', 'pe': 'ぺ', 'po': '',
         'ltsu': 'っ',
         'sha': 'しゃ', 'shu': 'しゅ', 'sho': 'しょ',
         'ja': 'じゃ', 'ju': 'じゅ', 'jo': 'じょ',
-        'jya': 'ゃ', 'jyu': 'じゅ', 'jyo': 'じょ',
+        'jya': '', 'jyu': 'じゅ', 'jyo': 'じょ',
         'cha': 'ちゃ', 'chu': 'ちゅ', 'cho': 'ちょ',
         'nya': 'にゃ', 'nyu': 'にゅ', 'nyo': 'にょ',
         'hya': 'ひゃ', 'hyu': 'ひゅ', 'hyo': 'ひょ',
@@ -240,20 +243,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Correct reading answer');
                 if (!mistakeMade) {
                     score++;
-                    scoreElement.innerHTML = `score: ${score}`;
+                    scoreElement.innerHTML = score;
                 }
                 if (reviewMode) {
                     console.log('Removing from difficult kanji:', randomKanji);
                     difficultKanji.delete(JSON.stringify(randomKanji));
                     saveDifficultKanji();
                     updateStartScreenReviewButton();
-                    
-                    // Update remaining counter after removing kanji
-                    const remainingElement = document.getElementById('remaining');
-                    remainingElement.textContent = `Remaining: ${difficultKanji.size}`;
                 }
-                chooseKanji();
-                checkWinCondition();
+                
+                // Update progress before checking win condition
+                updateProgress();
+                
+                // Check win condition before choosing next kanji
+                if (remainingReadingKanji.length === 0 && remainingMeaningKanji.length === 0) {
+                    checkWinCondition();
+                } else {
+                    chooseKanji();
+                }
+                
             } else {
                 console.log('Incorrect reading answer');
                 mistakeMade = true;
@@ -269,20 +277,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Correct meaning answer');
                 if (!mistakeMade) {
                     score++;
-                    scoreElement.innerHTML = `score: ${score}`;
+                    scoreElement.innerHTML = score;
                 }
                 if (reviewMode) {
                     console.log('Removing from difficult kanji:', randomKanji);
                     difficultKanji.delete(JSON.stringify(randomKanji));
                     saveDifficultKanji();
                     updateStartScreenReviewButton();
-                    
-                    // Update remaining counter after removing kanji
-                    const remainingElement = document.getElementById('remaining');
-                    remainingElement.textContent = `Remaining: ${difficultKanji.size}`;
                 }
-                chooseKanji();
-                checkWinCondition();
+                
+                // Update progress before checking win condition
+                updateProgress();
+                
+                // Check win condition before choosing next kanji
+                if (remainingReadingKanji.length === 0 && remainingMeaningKanji.length === 0) {
+                    checkWinCondition();
+                } else {
+                    chooseKanji();
+                }
+                
             } else {
                 console.log('Incorrect meaning answer');
                 mistakeMade = true;
@@ -320,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Resetting game');
         reviewMode = false;
         score = 0;
-        scoreElement.innerHTML = `score: ${score}`;
+        scoreElement.innerHTML = score;
         startScreen.classList.remove('hidden');
         gameScreen.classList.add('hidden');
         winScreen.classList.add('hidden');
@@ -347,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Filter kanji based on selected subchapters
-        const filteredKanji = kanjiLib.filter(k => 
+        filteredKanji = kanjiLib.filter(k => 
             selectedSubchapters.some(s => 
                 s.chapter === k.chapter && s.subchapter === k.subchapter
             )
@@ -359,6 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startScreen.classList.add('hidden');
         gameScreen.classList.remove('hidden');
         
+        updateProgress();
         chooseKanji();
     });
 
@@ -374,17 +388,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkAnswer();
                 input.value = '';
             } else {
-                if (randomMode === 'reading') {
-                    if (remainingReadingKanji.length > 0) {
-                        checkAnswer();
-                        input.value = '';
-                    }
-                } else if (randomMode === 'meaning') {
-                    if (remainingMeaningKanji.length > 0) {
-                        checkAnswer();
-                        input.value = '';
-                    }
-                }
+                checkAnswer();
+                input.value = '';
             }
         }
     });
@@ -394,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial displays
-    scoreElement.innerHTML = `score: ${score}`;
+    scoreElement.innerHTML = score;
 
     // Add chapter checkbox functionality
     document.querySelectorAll('.chapter-label input[type="checkbox"]').forEach(checkbox => {
@@ -413,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startReviewMode() {
         reviewMode = true;
         score = 0;
-        scoreElement.innerHTML = `score: ${score}`;
+        scoreElement.innerHTML = score;
         winScreen.classList.add('hidden');
         gameScreen.classList.remove('hidden');
         chooseKanji();
@@ -432,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         reviewMode = true;
         score = 0;
-        scoreElement.innerHTML = `score: ${score}`;
+        scoreElement.innerHTML = score;
         startScreen.classList.add('hidden');
         gameScreen.classList.remove('hidden');
         
@@ -451,4 +456,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial update of review button
     console.log('Initial update of review button');
     updateStartScreenReviewButton();
+
+    function updateProgress() {
+        const totalQuestions = reviewMode ? 
+            difficultKanji.size * 2 : 
+            (remainingReadingKanji.length + remainingMeaningKanji.length);
+        
+        const initialTotal = reviewMode ?
+            difficultKanji.size * 2 :
+            filteredKanji.length * 2;
+        
+        const completed = initialTotal - totalQuestions;
+        const percentage = (completed / initialTotal) * 100;
+        
+        // Update circular progress
+        const circle = document.querySelector('.progress-ring__circle');
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+        const offset = circumference - (percentage / 100 * circumference);
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = offset;
+    }
+
+    function updateScore() {
+        score++;
+        document.getElementById('score').textContent = score;
+    }
 });

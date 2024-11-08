@@ -40,10 +40,16 @@
     <div id="game-screen" class="hidden">
         <div id="topbar">
             <div id="kanji"></div>
-            <div id="score">score: 0</div>
         </div>
         <div id="input">
             <input type="text" id="kanjiinput">
+        </div>
+        <div id="progress-container">
+            <svg class="progress-ring" width="160" height="160">
+                <circle class="progress-ring__circle-bg" cx="80" cy="80" r="72"/>
+                <circle class="progress-ring__circle" cx="80" cy="80" r="72"/>
+            </svg>
+            <div id="score">0</div>
         </div>
         <div id="result"></div>
     </div>
