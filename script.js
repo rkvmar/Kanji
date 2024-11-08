@@ -228,11 +228,57 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProgress();
     }
 
+    function animateNumber(element, start, end, duration = 500) {
+        const startTime = performance.now();
+        const difference = end - start;
+        
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function for smooth animation
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const current = Math.floor(start + (difference * easeOutQuart));
+            
+            element.textContent = current;
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+        
+        requestAnimationFrame(update);
+    }
+
+    function animateScore(element, start, end) {
+        const duration = 500;
+        const startTime = performance.now();
+        element.classList.add('score-animate');
+        
+        function updateNumber(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing function for smooth animation
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const current = Math.floor(start + (end - start) * easeOutQuart);
+            
+            element.textContent = current;
+            
+            if (progress < 1) {
+                requestAnimationFrame(updateNumber);
+            } else {
+                element.classList.remove('score-animate');
+            }
+        }
+        
+        requestAnimationFrame(updateNumber);
+    }
+
     function checkAnswer() {
         let userAnswer = input.value.trim();
         
         if (waitingForCorrect) {
-            // If waiting for correct answer, only check against the correct answer
             if (randomMode === 'reading') {
                 userAnswer = wanakana.toHiragana(userAnswer);
             } else {
@@ -256,7 +302,6 @@ document.addEventListener('DOMContentLoaded', () => {
             randomKanji.reading : 
             randomKanji.meaning.toLowerCase();
 
-        // Only convert to hiragana in reading mode
         if (randomMode === 'reading') {
             userAnswer = wanakana.toHiragana(userAnswer);
         } else {
@@ -266,8 +311,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (userAnswer === correctAnswer) {
             result.innerHTML = 'Correct!';
             result.className = 'correct';
+            
+            // Remove any existing animation class
+            scoreElement.classList.remove('score-animate');
+            
+            // Update score and trigger animation
             score++;
             scoreElement.textContent = score;
+            
+            // Force browser to process the DOM update
+            void scoreElement.offsetWidth;
+            
+            // Add animation class
+            scoreElement.classList.add('score-animate');
+            
             nextKanji();
             input.value = '';
         } else {
