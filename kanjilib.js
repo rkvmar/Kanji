@@ -138,7 +138,6 @@ const kanjiLib = [
     {"kanji": "左", "meaning": "left", "reading": "ひだり", "chapter": "3", "subchapter": "1"},
     {"kanji": "前", "meaning": "front", "reading": "まえ", "chapter": "3", "subchapter": "1"},
     {"kanji": "後ろ", "meaning": "back", "reading": "うしろ", "chapter": "3", "subchapter": "1"},
-    {"kanji": "〜の後", "meaning": "after", "reading": "〜のあと", "chapter": "3", "subchapter": "1"},
     {"kanji": "後で", "meaning": "later", "reading": "あとで", "chapter": "3", "subchapter": "1"},
     {"kanji": "午前", "meaning": "morning", "reading": "ごぜん", "chapter": "3", "subchapter": "2"},
     {"kanji": "午後", "meaning": "afternoon", "reading": "ごご", "chapter": "3", "subchapter": "2"},
