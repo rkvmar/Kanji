@@ -154,7 +154,7 @@ const kanjiLib = [
     {"kanji": "六時間", "meaning": "six hours", "reading": "ろくじかん", "chapter": "3", "subchapter": "2"},
     {"kanji": "七時間", "meaning": "seven hours", "reading": "ななじかん", "chapter": "3", "subchapter": "2"},
     {"kanji": "八時間", "meaning": "eight hours", "reading": "はちじかん", "chapter": "3", "subchapter": "2"},
-    {"kanji": "九時間", "meaning": "nine hours", "reading": "きゅうじかん", "chapter": "3", "subchapter": "2"},
+    {"kanji": "九時間", "meaning": "nine hours", "reading": "くじかん", "chapter": "3", "subchapter": "2"},
     {"kanji": "東", "meaning": "east", "reading": "ひがし", "chapter": "3", "subchapter": "2"},
     {"kanji": "東口", "meaning": "east exit", "reading": "ひがしぐち", "chapter": "3", "subchapter": "2"},
     {"kanji": "中東", "meaning": "middle east", "reading": "ちゅうとう", "chapter": "3", "subchapter": "2"},
