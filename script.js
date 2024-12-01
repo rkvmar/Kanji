@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM Content Loaded');
-    
     // DOM Elements
     const kanjielment = document.getElementById('kanji');
     const input = document.getElementById('kanjiinput');
@@ -297,9 +296,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return;
         }
-
         const correctAnswer = randomMode === 'reading' ? 
-            randomKanji.reading : 
+            randomKanji.reading :
             randomKanji.meaning.toLowerCase();
 
         if (randomMode === 'reading') {

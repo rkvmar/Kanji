@@ -165,7 +165,7 @@ const kanjiLib = [
     {"kanji": "北", "meaning": "north", "reading": "きた", "chapter": "3", "subchapter": "2"},
     {"kanji": "北口", "meaning": "north exit", "reading": "きたぐち", "chapter": "3", "subchapter": "2"},
     {"kanji": "田中さん", "meaning": "tanaka", "reading": "たなかさん", "chapter": "4", "subchapter": "1"},
-    {"kanji": "力", "meaning": "power", "reading": "りょく", "chapter": "4", "subchapter": "1"},
+    {"kanji": "力", "meaning": "power", "reading": "ちから", "chapter": "4", "subchapter": "1"},
     {"kanji": "男の人", "meaning": "man", "reading": "おとこのひと", "chapter": "4", "subchapter": "1"},
     {"kanji": "女の人", "meaning": "woman", "reading": "おんなのひと", "chapter": "4", "subchapter": "1"},
     {"kanji": "男の子", "meaning": "boy", "reading": "おとこのこ", "chapter": "4", "subchapter": "1"},
