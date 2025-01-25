@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomKanji;
     let randomMode;
     let difficultKanji = [];
-
     let isReadingMode = false;
     const inputField = document.getElementById('kanjiinput');
     let compositionText = '';
