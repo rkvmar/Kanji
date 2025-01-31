@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateProgress() {
         const total = remainingKanji.length * 2;
-        const completed = total - (remainingReadingKanji.length + remainingMeaningKanji.length);
+        const completed = total - (remainingReadingKanji.length + remainingMeaningKanji.length) - 1; // Adjusted to fix the progress bar
         const percentage = (completed / total) * 100;
         
         const circle = document.querySelector('.progress-ring__circle');
