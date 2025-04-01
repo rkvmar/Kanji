@@ -1,3 +1,3 @@
 # Kanji
 
-Kanji training app.
+Kanji training app based on "Kanji Look And Learn" workbook.

@@ -1584,9 +1584,9 @@ const kanjiLib = [
     subchapter: "1",
   },
   {
-    kanji: "少年生",
+    kanji: "小学生",
     meaning: "elementary school student",
-    reading: "しょうねんせい",
+    reading: "しょうがくせい",
     chapter: "6",
     subchapter: "1",
   },
@@ -1710,9 +1710,9 @@ const kanjiLib = [
     subchapter: "2",
   },
   {
-    kanji: "大好きな",
+    kanji: "大好き",
     meaning: "very favourite",
-    reading: "だいすきな",
+    reading: "だいすき",
     chapter: "6",
     subchapter: "2",
   },
