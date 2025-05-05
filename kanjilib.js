@@ -6,7 +6,13 @@ const kanjiLib = [
     chapter: "1",
     subchapter: "1",
   },
-  { kanji: "二", meaning: "two", reading: "に", chapter: "1", subchapter: "1" },
+  {
+    kanji: "二",
+    meaning: "two",
+    reading: "に",
+    chapter: "1",
+    subchapter: "1"
+  },
   {
     kanji: "三",
     meaning: "three",
@@ -413,7 +419,13 @@ const kanjiLib = [
     chapter: "1",
     subchapter: "2",
   },
-  { kanji: "目", meaning: "eye", reading: "め", chapter: "1", subchapter: "2" },
+  {
+    kanji: "目",
+    meaning: "eye",
+    reading: "め",
+    chapter: "1",
+    subchapter: "2"
+  },
   {
     kanji: "日",
     meaning: "day",
@@ -1745,7 +1757,7 @@ const kanjiLib = [
     subchapter: "1",
   },
   {
-    kanji: "にゅがくする",
+    kanji: "入学する",
     meaning: "to enter a school",
     reading: "にゅがくする",
     chapter: "7",
