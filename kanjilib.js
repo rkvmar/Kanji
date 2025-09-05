@@ -11,7 +11,7 @@ const kanjiLib = [
     meaning: "two",
     reading: "に",
     chapter: "1",
-    subchapter: "1"
+    subchapter: "1",
   },
   {
     kanji: "三",
@@ -424,7 +424,7 @@ const kanjiLib = [
     meaning: "eye",
     reading: "め",
     chapter: "1",
-    subchapter: "2"
+    subchapter: "2",
   },
   {
     kanji: "日",
@@ -1980,6 +1980,76 @@ const kanjiLib = [
     chapter: "7",
     subchapter: "2",
   },
+  {
+    kanji: "休む",
+    meaning: "to rest",
+    reading: "やすむ",
+    chapter: "8",
+    subchapter: "1",
+  },
+  {
+    kanji: "休み",
+    meaning: "holiday",
+    reading: "やすみ",
+    chapter: "8",
+    subchapter: "1",
+  },
+  {
+    kanji: "走る",
+    meaning: "to run",
+    reading: "はしる",
+    chapter: "8",
+    subchapter: "1",
+  },
+  {
+    kanji: "起きる",
+    meaning: "to get up",
+    reading: "おきる",
+    chapter: "8",
+    subchapter: "1",
+  },
+  {
+    kanji: "起こす",
+    meaning: "to wake someone up",
+    reading: "おこす",
+    chapter: "8",
+    subchapter: "1",
+  },
+  {
+    kanji: "貝",
+    meaning: "shellfish",
+    reading: "かい",
+    chapter: "8",
+    subchapter: "1",
+  },
+  {
+    kanji: "買う",
+    meaning: "to buy",
+    reading: "かう",
+    chapter: "8",
+    subchapter: "1",
+  },
+  {
+    kanji: "売る",
+    meaning: "to sell",
+    reading: "うる",
+    chapter: "8",
+    subchapter: "1",
+  },
+  {
+    kanji: "読む",
+    meaning: "to read",
+    reading: "よむ",
+    chapter: "8",
+    subchapter: "1",
+  },
+  {
+    kanji: "書く",
+    meaning: "to write",
+    reading: "かく",
+    chapter: "8",
+    subchapter: "1",
+  },
 ];
 /*
 TEMPLATE:
@@ -1989,5 +2059,5 @@ TEMPLATE:
   reading: "",
   chapter: "",
   subchapter: "",
-}
+},
 */
