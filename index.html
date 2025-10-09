@@ -1,47 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanji Training</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/wanakana@4.0.2/umd/wanakana.min.js"></script>
-</head>
-<body>
-    <div id="start-screen">
-        <h1>Kanji Training</h1>
-        <div id="chapter-select-wrapper">
-            <div id="chapter-select">
-                <!-- Content will be generated dynamically -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kanji Training</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://unpkg.com/wanakana@4.0.2/umd/wanakana.min.js"></script>
+    </head>
+    <body>
+        <div id="start-screen">
+            <h1>Kanji Training</h1>
+            <div id="max-questions-control">
+                <label for="max-questions"
+                    >Max Questions:
+                    <span id="max-questions-value">25</span></label
+                >
+                <input
+                    type="range"
+                    id="max-questions"
+                    min="5"
+                    max="100"
+                    value="25"
+                    step="5"
+                />
             </div>
+            <div id="chapter-select-wrapper">
+                <div id="chapter-select">
+                    <!-- Content will be generated dynamically -->
+                </div>
+            </div>
+            <button id="start-review-button" class="hidden">
+                Review Difficult Kanji
+            </button>
+            <button id="start-button">Start</button>
         </div>
-        <button id="start-review-button" class="hidden">Review Difficult Kanji</button>
-        <button id="start-button">Start</button>
-    </div>
-    <div id="game-screen" class="hidden">
-        <div id="topbar">
-            <div id="kanji"></div>
+        <div id="game-screen" class="hidden">
+            <div id="topbar">
+                <div id="kanji"></div>
+            </div>
+            <div id="input">
+                <input type="text" id="kanjiinput" />
+            </div>
+            <div id="multiple-choice" class="hidden">
+                <div class="choice-option" data-choice="0"></div>
+                <div class="choice-option" data-choice="1"></div>
+                <div class="choice-option" data-choice="2"></div>
+            </div>
+            <div id="progress-container">
+                <svg class="progress-ring" width="160" height="160">
+                    <circle
+                        class="progress-ring__circle-bg"
+                        cx="80"
+                        cy="80"
+                        r="72"
+                    />
+                    <circle
+                        class="progress-ring__circle"
+                        cx="80"
+                        cy="80"
+                        r="72"
+                    />
+                </svg>
+                <div id="score">0</div>
+            </div>
+            <div id="result"></div>
         </div>
-        <div id="input">
-            <input type="text" id="kanjiinput">
+        <div id="win-screen" class="hidden">
+            <h1>Training Complete!</h1>
+            <p>Final Score: <span id="final-score">0</span></p>
+            <p>Difficult Kanji: <span id="difficult-count">0</span></p>
+            <button id="review-button" class="hidden">
+                Review Difficult Kanji
+            </button>
+            <button id="restart-button">Play Again</button>
         </div>
-        <div id="progress-container">
-            <svg class="progress-ring" width="160" height="160">
-                <circle class="progress-ring__circle-bg" cx="80" cy="80" r="72"/>
-                <circle class="progress-ring__circle" cx="80" cy="80" r="72"/>
-            </svg>
-            <div id="score">0</div>
-        </div>
-        <div id="result"></div>
-    </div>
-    <div id="win-screen" class="hidden">
-        <h1>Training Complete!</h1>
-        <p>Final Score: <span id="final-score">0</span></p>
-        <p>Difficult Kanji: <span id="difficult-count">0</span></p>
-        <button id="review-button" class="hidden">Review Difficult Kanji</button>
-        <button id="restart-button">Play Again</button>
-    </div>
-    <script src="kanjilib.js"></script>
-    <script src="script.js"></script>
-</body>
+        <script src="kanjilib.js"></script>
+        <script src="script.js"></script>
+    </body>
 </html>
