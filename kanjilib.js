@@ -2214,7 +2214,7 @@ const kanjiLib = [
   {
     kanji: "夕方",
     meaning: "early evening",
-    reading: "ゆうかた",
+    reading: "ゆうがた",
     chapter: "9",
     subchapter: "1",
   },
