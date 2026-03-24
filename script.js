@@ -1,5 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM Content Loaded");
+  const kanjiLib = Object.entries(kanjilib).flatMap(([chapter, subchapters]) =>
+    Object.entries(subchapters).flatMap(([subchapter, entries]) =>
+      entries.map((entry) => ({
+        ...entry,
+        chapter,
+        subchapter,
+      })),
+    ),
+  );
   // DOM Elements
   const kanjielment = document.getElementById("kanji");
   const input = document.getElementById("kanjiinput");
