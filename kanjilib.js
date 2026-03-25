@@ -1874,7 +1874,7 @@ const kanjilib = {
       {
         kanji: "料理",
         meaning: "cooking",
-        reading: "りょり",
+        reading: "りょうり",
       },
       {
         kanji: "ご飯",
@@ -1927,7 +1927,7 @@ const kanjilib = {
         reading: "ぶたにく",
       },
       {
-        kanji: "鶏肉",
+        kanji: "鳥肉",
         meaning: "chicken",
         reading: "とりにく",
       },
