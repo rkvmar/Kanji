@@ -1936,60 +1936,59 @@ const kanjilib = {
       {
         kanji: "お茶",
         meaning: "tea",
-        reading: "おちゃ"
+        reading: "おちゃ",
       },
       {
         kanji: "茶色",
         meaning: "brown",
-        reading: "ちゃいろ"
+        reading: "ちゃいろ",
       },
       {
         kanji: "長野",
         meaning: "nagano",
-        reading: "ながの"
+        reading: "ながの",
       },
       {
         kanji: "野菜",
         meaning: "vegetable",
-        reading: "やさい"
+        reading: "やさい",
       },
       {
         kanji: "切る",
         meaning: "to cut",
-        reading: "きる"
+        reading: "きる",
       },
       {
-        kanji: "切って",
+        kanji: "切手",
         meaning: "postage stamp",
-        reading: "きって"
+        reading: "きって",
       },
       {
         kanji: "大切な",
         meaning: "precious",
-        reading: "たいせつな"
+        reading: "たいせつな",
       },
       {
         kanji: "作る",
         meaning: "to make",
-        reading: "つくる"
+        reading: "つくる",
       },
       {
         kanji: "手作り",
         meaning: "handmade",
-        reading: "てづくり"
+        reading: "てづくり",
       },
       {
         kanji: "未来",
         meaning: "future",
-        reading: "みらい"
+        reading: "みらい",
       },
       {
         kanji: "味",
         meaning: "taste",
-        reading: "あじ"
-      }
-
-    ]
+        reading: "あじ",
+      },
+    ],
   },
 };
 
