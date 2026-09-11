@@ -1990,6 +1990,76 @@ const kanjilib = {
       },
     ],
   },
+  12: {
+    1: [
+      {
+        kanji: "音",
+        meaning: "sound",
+        reading: "おと",
+      },
+      {
+        kanji: "音楽",
+        meaning: "music",
+        reading: "おんがく",
+      },
+      {
+        kanji: "楽しい",
+        meaning: "enjoyable",
+        reading: "たのしい",
+      },
+      {
+        kanji: "楽しみ",
+        meaning: "fun",
+        reading: "たのしみ",
+      },
+      {
+        kanji: "歌",
+        meaning: "song",
+        reading: "うた",
+      },
+      {
+        kanji: "歌う",
+        meaning: "to sing",
+        reading: "うたう",
+      },
+      {
+        kanji: "歌手",
+        meaning: "singer",
+        reading: "かしゅ",
+      },
+      {
+        kanji: "自分",
+        meaning: "oneself",
+        reading: "じぶん",
+      },
+      {
+        kanji: "自転車",
+        meaning: "bicycle",
+        reading: "じてんしゃ",
+      },
+      {
+        kanji: "乗る",
+        meaning: "to ride",
+        reading: "のる",
+      },
+      {
+        kanji: "写す",
+        meaning: "to copy",
+        reading: "うつす",
+      },
+      {
+        kanji: "写真",
+        meaning: "photograph",
+        reading: "しゃしん",
+      },
+      {
+        kanji: "真ん中",
+        meaning: "center",
+        reading: "まんなか",
+      },
+    ]
+  }
+
 };
 
 /*
