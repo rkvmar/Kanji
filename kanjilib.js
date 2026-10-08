@@ -2057,6 +2057,53 @@ const kanjilib = {
         meaning: "center",
         reading: "まんなか",
       },
+    ],
+    2: [
+      {
+        kanji: "五台",
+        meaning: "5 machines",
+        reading: "ごだい",
+      },
+      {
+        kanji: "映画",
+        meaning: "movie",
+        reading: "えいが",
+      },
+      {
+        kanji: "羊",
+        meaning: "sheep",
+        reading: "ひつじ",
+      },
+      {
+        kanji: "服",
+        meaning: "clothes",
+        reading: "ふく",
+      },
+      {
+        kanji: "洋服",
+        meaning: "western clothes",
+        reading: "ようふく",
+      },
+      {
+        kanji: "着る",
+        meaning: "to wear",
+        reading: "きる",
+      },
+      {
+        kanji: "上着",
+        meaning: "jacket",
+        reading: "うわぎ",
+      },
+      {
+        kanji: "下着",
+        meaning: "underwear",
+        reading: "したぎ",
+      },
+      {
+        kanji: "着く",
+        meaning: "to arrive",
+        reading: "つく",
+      },
     ]
   }
 
